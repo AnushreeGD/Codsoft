@@ -1,32 +1,39 @@
-import random 
+import random
 
-options =("rock","paper","scissor")
-running = True
+def get_computer_choice():
+    options = ['rock', 'paper', 'scissors']
+    return random.choice(options)
 
-while running:
+def get_user_choice():
+    choice = input("Enter your choice (rock, paper, scissors): ").lower()
+    while choice not in ['rock', 'paper', 'scissors']:
+        choice = input("Invalid choice. Please enter rock, paper, or scissors: ").lower()
+    return choice
 
-    player = None
-    computer = random.choice(options)
+def determine_winner(user_choice, computer_choice):
+    if user_choice == computer_choice:
+        return "It's a tie!"
+    elif (user_choice == 'rock' and computer_choice == 'scissors') or \
+         (user_choice == 'scissors' and computer_choice == 'paper') or \
+         (user_choice == 'paper' and computer_choice == 'rock'):
+        return "You win!"
+    else:
+        return "You lose!"
 
-while player not in options:
-    player = input("enter a choice (rock, paper, scissor): ")
+def play_game():
+    print("Welcome to Rock, Paper, Scissors!")
+    while True:
+        user_choice = get_user_choice()
+        computer_choice = get_computer_choice()
+        
+        print(f"\nYou chose {user_choice}.")
+        print(f"The computer chose {computer_choice}.")
+        
+        result = determine_winner(user_choice, computer_choice)
+        print(f"{result}\n")
+        
+        play_again = input("Do you want to play again? (yes/no): ").lower()
+        if play_again != 'yes'
+            break
 
-print(f"player:{player}")
-print(f"computer:{computer}")
-
-if player == computer:
-    print("it's tie!!")
-elif player == "rock" and computer == "scissor":
-    print("you win!!")
-elif player == "paper" and computer == "rock":
-    print("you win!!")
-elif player == "scissor" and computer == "paper":
-    print("you win!!")
-else:
-    print("you lose!")
-
-    play_again = input("play again? (yes/no): ").lower()
-    if not play_again == "yes":
-        running = False
-
-print("thanks for playing!")
+play_game()
